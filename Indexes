@@ -1,0 +1,21 @@
+# Create a single-key index if
+1
+# all queries use the same, single key
+2
+3
+db.orders.createIndex({
+4
+"customer.name": 1
+5
+})
+6
+7
+# Create compound indexes to support
+8
+# several different queries
+9
+db.products.createIndex({
+10
+"customer.name": 1, "salesDate": 1
+11
+})
