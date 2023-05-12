@@ -1,0 +1,4 @@
+Query
+
+Take advantage of a simple and expressive query API to retrieve and modify documents in a single collection or join across collections. 
+Transform and analyze your data in place – no ETL or duplication needed – with a powerful aggregation pipeline.
