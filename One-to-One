@@ -1,0 +1,56 @@
+// Query on embedded documents
+1
+2
+const cursor = db.collection('orders').find({
+3
+'customer.name': 'Jack Beanstalk'
+4
+});
+5
+6
+// Process multiple documents and return
+7
+// computed results with aggregation operations
+8
+9
+db.customers.aggregate([
+10
+//Stage 1: Filter orders by customer name
+11
+{
+12
+'$match': {
+13
+'customer.name': 'Jack Beanstalk'
+14
+}
+15
+},
+16
+//Stage 2: Unwind items array
+17
+{
+18
+'$unwind': '$items'
+19
+},
+20
+//Stage 3: Group remaining documents by item name and sum
+21
+{
+22
+'$group': {
+23
+'_id':'$items.name',
+24
+'totalOrders': {
+25
+'$sum': '$items.quantity'
+26
+}
+27
+}
+28
+}
+29
+])
