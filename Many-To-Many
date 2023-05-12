@@ -1,0 +1,29 @@
+// Query on embedded documents
+1
+findPublisher =
+2
+collection.find(("customer.name", "Jack Beanstalk"));
+3
+4
+// Process multiple documents and
+5
+// return computed results with aggregation operations
+6
+7
+AggregateIterable<‎Document‎> cursor =
+8
+collection.aggregate(Arrays.asList(
+9
+//Stage 1: Filter orders by customer name
+10
+match(eq("customer.name", "Jack Beanstalk")),
+11
+//Stage 2: Unwind items array
+12
+unwind("$items"),
+13
+//Stage 3: Group remaining documents
+14
+//by item name and sum
+15
+group("$items.name", sum("items.quantity"))));
