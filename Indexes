@@ -11,7 +11,6 @@ db.orders.createIndex({
 6
 7
 # Create compound indexes to support
-8
 # several different queries
 9
 db.products.createIndex({
