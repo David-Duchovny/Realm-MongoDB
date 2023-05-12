@@ -1,0 +1,5 @@
+MongoDB Shell
+~ mongosh "mongodb+srv://cluster0.ab123.mongodb.net/myFirstDatabase" --username user
+Enter Password: *******
+Using MongoDB: 4.4.8
+foo123-shard-00-03-a1b2c.mongodb.net:27017 - port
