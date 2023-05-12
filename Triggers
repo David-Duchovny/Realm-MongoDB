@@ -1,0 +1,36 @@
+# Execute server-side logic in response to
+1
+# database events or according to a schedule
+2
+3
+{
+4
+"name": "generatePreviousMonthSalesReport",
+5
+"type": "SCHEDULED",
+6
+"config":{
+7
+"schedule": "0 3 1 * *",
+8
+"skip_catchup_events": false
+9
+},
+10
+"disabled": false,
+11
+"event_processors":{
+12
+"FUNCTION":{
+13
+"config":{
+14
+"function_name": "generateMonthlySalesReport"
+15
+}
+16
+}
+17
+}
+18
+}
