@@ -1,0 +1,72 @@
+# Define a monthly sales materialized view that
+1
+# contains the cumulative monthly sales information
+2
+3
+updateMonthlySales=function(startDate){
+4
+db.plantSales.aggregate ( [
+5
+{
+6
+$match:{
+7
+date:{
+8
+$gte: startDate
+9
+}
+10
+}
+11
+},
+12
+{
+13
+$group:{
+14
+_id:{
+15
+$dateToString:{
+16
+format: "%Y-%m", date: "$date"
+17
+}
+18
+},
+19
+sales_quantity:{
+20
+$sum: "$quantity"
+21
+},
+22
+sales_amount:{
+23
+$sum: "$amount"
+24
+}
+25
+},
+26
+{
+27
+$merge:{
+28
+into: "monthlysales",
+29
+whenMatched: "replace"
+29
+}
+30
+}
+31
+] );
+32
+};
+33
+34
+// Perform initial run
+35
+36
+updateMonthlySales(new ISODate("1970-01-01"))
