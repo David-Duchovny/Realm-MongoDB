@@ -1,58 +1,84 @@
-# Query on embedded documents
+# Option 1: Model one-to-many
 1
+# relationships with embedded documents
 2
-cursor = db.collection('orders').find({
 3
-"customer.name": "Jack Beanstalk"
+Order={
 4
-});
+"_id": "2934f",
 5
+"salesDate": "2022-05-02",
 6
-# Process multiple documents and return computed
+"customer":{
 7
-# results with aggregation operations
+"name": "Jack Beanstalk",
 8
+"gender": "M",
 9
-db.orders.aggregate([
+"rewardsMember": "True"
 10
-# Stage 1: Filter orders by customer name
+},
 11
-{
+"items": [ {
 12
-'$match': {
+"name": "Monstera",
 13
-'customer.name': 'Jack Beanstalk'
+"price":{
 14
-}
+"$numberdecimal": "8.00"
 15
 },
 16
-# Stage 2: Unwind items array
+"quantity":{
 17
-{
+"$numberInt": "1"
 18
-'$unwind': '$items'
+}
 19
 },
 20
-# Stage 3: Group remaining documents
-21
-# by item name and sum
-22
 {
+21
+"name": "Pothos",
+22
+"price":{
 23
-'$group': {
+"$numberdecimal": "8.00"
 24
-'_id': '$items.name'
+},
 25
-'totalOrders': {
+"quantity":{
 26
-'$sum': '$items.quantity'
+"$numberInt": "2"
 27
 }
 28
-}
+} ]
 29
-},
+}
 30
-])
+31
+# Option 2: Model one-to-many
+32
+# relationships with document references
+33
+34
+Order={
+35
+"_id": "2934f",
+36
+"salesDate": "2022-05-02",
+37
+"customer": {
+38
+"name": "Jack Beanstalk",
+39
+"gender": "M",
+40
+"rewardsMember": "True"
+41
+},
+42
+"items": [ "12", "35", "86"]
+43
+}
