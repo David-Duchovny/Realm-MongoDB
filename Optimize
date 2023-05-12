@@ -1,0 +1,4 @@
+Optimize
+
+Optimize queries, react instantly to database changes, and generate materialized views on-demand. 
+MongoDB makes it easy to receive and process millions of requests per day with no change in performance.
